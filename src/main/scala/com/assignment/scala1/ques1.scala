@@ -6,7 +6,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 
 
-public object questions {
+public object ques1 {
 
   def main(args: Array[String]): Unit ={
 
@@ -17,7 +17,6 @@ public object questions {
       .appName("Arpan_Assinment")
       .config("hive.metastore.uris","thrift://jiouapp001-mst-01.gvs.ggn:9083")
       .config("spark.sql.warehouse.dir", "/apps/hive/warehouse")
-      .config("spark.hadoop.dfs.replication", 2)
       .enableHiveSupport()
       .getOrCreate()
 
@@ -35,7 +34,6 @@ public object questions {
     df = renamedDataFrame
     df.write.mode("overwrite").partitionBy("hour","minute").format("orc").saveAsTable("arpan_test.partitioned_source_table")
 
-    //--------------------------------------------------------------------------------------------------------------------------------------
 
     //Ques-1_1
     sparkSession.sql("drop table if exists arpan_test.top_10_customer")
@@ -59,7 +57,6 @@ public object questions {
     df23.orderBy(desc("Tonnage")).groupBy("hour")
     df23.select(col("radius_user_name"),col("sn_start_time"),col("hour"),col("Tonnage").alias("Total_Bytes"),col("basis_of")).write.mode("append").partitionBy("hour").format("orc").saveAsTable("arpan_test.top_10_customer")
 
-   // -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
   }
