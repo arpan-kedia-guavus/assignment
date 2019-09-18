@@ -6,7 +6,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 
 
-public object ques1 {
+ object ques1 {
 
   def main(args: Array[String]): Unit ={
 
